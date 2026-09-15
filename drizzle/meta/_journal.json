@@ -8,6 +8,13 @@
       "when": 1788661849397,
       "tag": "0000_misty_hercules",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789425374235,
+      "tag": "0001_natural_joshua_kane",
+      "breakpoints": true
     }
   ]
 }
