@@ -1,11 +1,18 @@
 import type { FastifyInstance } from "fastify";
-import { InvalidCredentialsError } from "./errors.js";
+import {
+    InvalidCredentialsError,
+    NotFoundError,
+} from "./errors.js";
 
 
 export function registerErrorHandler(app: FastifyInstance){
     app.setErrorHandler((error, request, reply) => {
         if (error instanceof InvalidCredentialsError) {
             return reply.status(401).send({ error: error.message});
+        }
+
+        if (error instanceof NotFoundError){
+            return reply.status(404).send({ error: error.message});
         }
 
         if (error.validation) {

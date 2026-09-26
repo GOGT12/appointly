@@ -1,4 +1,7 @@
-import { pgTable, uuid, text, boolean, timestamp, time, integer } from "drizzle-orm/pg-core";
+
+import { pgTable, uuid, text, boolean, timestamp, time, integer, serial } from "drizzle-orm/pg-core";
+
+
 
 export const users = pgTable("users", {
     id: uuid("id").primaryKey().defaultRandom(),
@@ -27,6 +30,18 @@ export const businessSettings = pgTable("business_settings", {
 
   singleton: boolean("singleton").notNull().default(true).unique(),
 
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const catalogServices = pgTable("catalog_services", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  description: text("description"),
+  durationMinutes: integer("duration_minutes").notNull(),
+  price: integer("price").notNull(), // en centavos, como definimos para dinero
+  imageUrl: text("image_url"),
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

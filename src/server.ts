@@ -3,6 +3,7 @@ import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod
 import { authRoutes } from "./modules/auth/auth.routes.js";
 import { settingsRoutes } from "./modules/businessSettings/settings.routes.js";
 import { registerErrorHandler } from "./shared/error-handler.js";
+import { catalogRoutes } from "./modules/catalog/catalog.routes.js";
 
 
 export function buildServer(){
@@ -17,6 +18,7 @@ export function buildServer(){
 
     app.register(authRoutes);
     app.register(settingsRoutes);
+    app.register(catalogRoutes);
 
 
     return app;
