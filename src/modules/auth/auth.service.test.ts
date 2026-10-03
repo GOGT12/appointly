@@ -1,8 +1,23 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
+import { db } from "../../db/client.js";
+import { users } from "../../db/schema.js";
+import { hashPassword } from "../../shared/bcrypt.js";
 import { login } from "./auth.service.js";
 import { InvalidCredentialsError } from "../../shared/errors.js";
 
 describe("auth.service login()", () => {
+
+  beforeAll(async () => {
+    const passwordHash = await hashPassword("owner123");
+    await db
+      .insert(users)
+      .values({
+        email: "owner@gmail.com",
+        passwordHash,
+        role: "owner"
+      });
+  });
+
   it("devuelve un token válido con credenciales correctas", async () => {
     const result = await login({
       email: "owner@gmail.com",

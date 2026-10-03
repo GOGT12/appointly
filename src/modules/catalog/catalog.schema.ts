@@ -1,4 +1,4 @@
-import z, { exactOptional } from "zod";
+import z from "zod";
 
 export const serviceIdParamsSchema = z.object({
     id: z.string().uuid("ID invalido"),
